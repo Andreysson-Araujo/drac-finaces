@@ -1,10 +1,15 @@
-import React from 'react'
-import * as C from "./styles"
+import React from "react";
+import * as C from "./styles";
+import ResumeItem from "../ResumeItem";
 
 const Resume = () => {
   return (
-    <C.Container>tEST</C.Container>
-  )
-}
+    <C.Container>
+      <ResumeItem />
+      <ResumeItem />
+      <ResumeItem />
+    </C.Container>
+  );
+};
 
-export default Resume
+export default Resume;
