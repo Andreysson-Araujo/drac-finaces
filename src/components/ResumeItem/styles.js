@@ -32,6 +32,7 @@ export const Header = styled.div`
     justify-content: space-around;
     width: 100%;
     gap: 10px;
+    margin: 20px auto;
 
     svg {
         width: 25px;
