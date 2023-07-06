@@ -1,19 +1,33 @@
 import React, { useState } from "react";
 import * as C from "./styles";
 
-const Form = () => {
+const Form = ({handleAdd}) => {
   const [desc, setDesc] = useState("");
   const [amount, setAmount] = useState("");
-  const [isExpansive, setExpense] = useState(false);
+  const [isExpense, setExpense] = useState(false);
+
+  const generatedID = () => Math.round(Math.random() * 1000);
 
   const handleSave = () => {
-    if (desc || amount) {
+    if (!desc || !amount) {
       alert("Informe a descrição do valor");
       return;
     } else if (amount < 1) {
       alert("O valor tem que ser positivo");
       return;
     }
+
+    const transaction = {
+      id: generatedID(),
+      desc: desc,
+      amount: amount,
+      expense: isExpense,
+    };
+
+    handleAdd(transaction);
+
+    setDesc("");
+    setAmount("");
   };
 
   return (
@@ -37,14 +51,14 @@ const Form = () => {
             id="rIncome/"
             defaultChecked
             name="group1"
-            onChange={() => setExpense(!isExpansive)}
+            onChange={() => setExpense(!isExpense)}
           />
           <C.Label htmlFor="rIncome">Entrada</C.Label>
           <C.Input
             type="radio"
-            id="rExpansive"
+            id="rExpanses"
             name="group1"
-            onChange={() => setExpense(!isExpansive)}
+            onChange={() => setExpense(!isExpense)}
           />
           <C.Label htmlFor="rIncome">Saida</C.Label>
         </C.RadioGroup>
