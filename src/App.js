@@ -17,11 +17,11 @@ const App = () => {
   useEffect(() => {
     const amountExpense = transactionsList
       .filter((item) => item.expense)
-      .map((transaction) => Number(transaction.amout));
+      .map((transaction) => Number(transaction.amount));
 
     const amountIncome = transactionsList
-      .filter((item) => item.expense)
-      .map((transaction) => Number(transaction.amout));
+      .filter((item) => !item.expense)
+      .map((transaction) => Number(transaction.amount));
 
     const expense = amountExpense.reduce((acc, cur) => acc + cur, 0).toFixed(2);
     const income = amountIncome.reduce((acc, cur) => acc + cur, 0).toFixed(2);
@@ -30,7 +30,7 @@ const App = () => {
 
     setIncome(`R$ ${income}`);
     setExpense(`R$ ${expense}`);
-    setTotal(`${Number(income) < Number(expense) ? "-" : ""}R${total}`);
+    setTotal(`${Number(income) < Number(expense) ? "-" : ""}R$ ${total}`);
   }, [transactionsList]);
 
   const handleAdd = (transaction) => {
@@ -45,7 +45,7 @@ const App = () => {
     <>
       <Header />
       <Resume income={income} expense={expense} total={total} />
-      <Form handleAdd={handleAdd}/>
+      <Form handleAdd={handleAdd} transactionsList={transactionsList} setTransactionsList={setTransactionsList}/>
       <GlobalStyle />
     </>
   );
